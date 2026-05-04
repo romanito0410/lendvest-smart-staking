@@ -52,6 +52,21 @@ contract AutomationsIntegrationMainnetTest is BaseMainnetTest {
     localVault.setLVLidoVaultUtilAddress(address(0));
 }
 
+    function test_setLVLidoVaultUpkeeperAddress_EmitsEvent() public {
+        LVLidoVault localVault = new LVLidoVault(
+            address(ajnaPool),
+            address(liquidationProxy)
+        );
+
+        address newUpkeeper = makeAddr("newUpkeeper");
+
+        vm.expectEmit(false, false, false, true);
+        emit VaultLib.LVLidoVaultUpkeeperAddressUpdated(address(0), newUpkeeper);
+
+        vm.prank(localVault.owner());
+        localVault.setLVLidoVaultUpkeeperAddress(newUpkeeper);
+    }
+
     function test_SetRequestConfiguration() public {
         bytes memory requestCBOR = hex"1234";
         uint64 subscriptionId = 123;

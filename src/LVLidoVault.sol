@@ -1061,6 +1061,7 @@ contract LVLidoVault is IMorphoFlashLoanCallback, Ownable {
      */
     function setLVLidoVaultUpkeeperAddress(address _LVLidoVaultUpkeeper) public onlyOwner {
         require(_LVLidoVaultUpkeeper != address(0), "Invalid address");
+        emit VaultLib.LVLidoVaultUpkeeperAddressUpdated(LVLidoVaultUpkeeper, _LVLidoVaultUpkeeper);
         LVLidoVaultUpkeeper = _LVLidoVaultUpkeeper;
     }
 
